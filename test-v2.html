@@ -1,0 +1,121 @@
+
+
+<!DOCTYPE html>
+
+<html lang="sv">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>AI Invest Mini 2.0 – Test</title>
+
+<style>
+
+body{background:#0b1020;color:#eef3ff;font-family:Arial,sans-serif;margin:0;padding:20px}
+
+h1{font-size:27px}
+
+.card{background:#19243b;border:1px solid #344461;border-radius:20px;padding:20px;margin:18px 0}
+
+.muted{color:#a7b6cc}
+
+.value{font-size:34px;font-weight:bold}
+
+canvas{width:100%;height:180px}
+
+.item{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #344461}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>◇ AI Invest Mini 2.0</h1>
+
+<p class="muted">Testversion – inte livekurser</p>
+
+<div class="card">
+
+<p>Senast registrerat portföljvärde</p>
+
+<div class="value">15 600 kr</div>
+
+<p class="muted">Illustrativ graf – exempeldata</p>
+
+<canvas id="chart"></canvas>
+
+</div>
+
+<div class="card">
+
+<h2>Mina innehav</h2>
+
+<div class="item"><span>IonQ</span><b>1 437 kr</b></div>
+
+<div class="item"><span>Quantum Computing Inc.</span><b>313 kr</b></div>
+
+<div class="item"><span>Avanza Global</span><b>4 629 kr</b></div>
+
+<div class="item"><span>DNB Global Indeks S</span><b>4 620 kr</b></div>
+
+<div class="item"><span>Länsförsäkringar Global Index</span><b>4 601 kr</b></div>
+
+</div>
+
+<div class="card">
+
+<h2>Marknadsdata</h2>
+
+<p class="muted">Nästa steg: anslut en datakälla för aktuella kurser och historik.</p>
+
+</div>
+
+<script>
+
+const c=document.getElementById("chart");
+
+const ctx=c.getContext("2d");
+
+function draw(){
+
+const w=c.width=c.clientWidth*devicePixelRatio;
+
+const h=c.height=180*devicePixelRatio;
+
+const values=[15100,15380,15250,15600];
+
+const lo=14900,hi=15800;
+
+ctx.strokeStyle="#68d3af";
+
+ctx.lineWidth=3*devicePixelRatio;
+
+ctx.beginPath();
+
+values.forEach((v,i)=>{
+
+const x=15*devicePixelRatio+i*(w-30*devicePixelRatio)/(values.length-1);
+
+const y=h-20*devicePixelRatio-(v-lo)/(hi-lo)*(h-40*devicePixelRatio);
+
+if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+
+});
+
+ctx.stroke();
+
+}
+
+draw();
+
+window.addEventListener("resize",draw);
+
+</script>
+
+</body>
+
+</html>
